@@ -7,11 +7,7 @@ const num = Number(
 const value1 = "ДА, )))";
 const value2 = "Нет, (((";
 
-if (num % 5 === 0) {
-  alert(value1);
-} else if (num % 3 === 0) {
-  alert(value1);
-} else if (num % 2 === 0) {
+if (num % 5 === 0 || num % 3 === 0 || num % 2 === 0) {
   alert(value1);
 } else {
   alert(value2);
@@ -75,7 +71,7 @@ const age = Number(
     "Проверять возраст пользователя на совершеннолетие, введите свой возраст пожайлуста"
   )
 );
-if (isAdult(age) === true) {
+if (isAdult(age)) {
   alert("Вам уже всё можно");
 } else {
   alert("К сожелению вам ещё не 18(");
@@ -121,11 +117,31 @@ console.log("делится ли 15 на 4 >>", checkMultiplicity(15, 4));
 
 // 3) Проверка возможности треугольника. Создать функцию которая принимает длины треугольника; функция возвращает true если треугольник возможен и false если нет
 
-// // 4) Написать функции расчета площадей (поверхности) следующих фигур/тел: треугольника, прямоугольника (конуса, параллелепипеда)
-// // Площадь треугольника по формуле Герона
+const triangle = isTrianglePossible(2, 3, 1);
+if (triangle) {
+  console.log("Треугольник возможен");
+} else {
+  console.log("Треугольник не возможен");
+}
 
-//
+/**
+ *
+ * @param {Number} a - первая сторонна треугольника
+ * @param {Number} b - вторая сторонна треугольника
+ * @param {Number} c - третья сторонна треугольника
+ * @returns {boolean} Проверка возможности треугольника.
+ */
+function isTrianglePossible(a, b, c) {
+  if ((a > 0) & (b > 0) & (c > 0)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
+// 4) Написать функции расчета площадей (поверхности) следующих фигур/тел: треугольника, прямоугольника (конуса, параллелепипеда)
+
+// Площадь треугольника по формуле Герона
 /**
  *
  * @param {Number} a - первая сторонна треугольника
@@ -142,11 +158,11 @@ const areaTriangle = function (a, b, c) {
 };
 console.log("Площадь треугольника = ", areaTriangle(5.5, 5, 3));
 
-//  //  Площадь поверхности прямоугольного параллелепипеда S = 2(ab+ bc+ ac)
+//  Площадь поверхности прямоугольного параллелепипеда S = 2(ab+ bc+ ac)
 
 const surfaceAreaParallelepiped = calcSurfaceAreaParallelepiped(1, 2, 3);
 console.log(
-  "Площадь поверхности прямоугольного параллелепипеда",
+  "Площадь поверхности прямоугольного параллелепипеда = ",
   surfaceAreaParallelepiped
 );
 
@@ -168,9 +184,100 @@ function calcSurfaceAreaParallelepiped(x, y, z) {
 
 // 1. создать объект Student который содержит следующие свойства: имя, фамилию, пол, контактные данные, методы: вывод адреса, смена пола.
 
-// 2. создать объект, который содержит свойства, о факультете и кафедре, методы: перевод на другой факультет. (можно на свой выбор)
+const student = {
+  name: "Alina",
+  surname: "Sidorenko",
+  isMale: false,
+  phoneNumber: 380633003222,
+  city: "Kiev",
+  street: "Grushevsky",
+  house: 22,
+  apartmentNumber: 120,
+  outputAddress() {
+    return (
+      "city: " + this.city + ", " + "street: " + this.street + ", " + this.house
+    );
+  },
+  changeGender() {
+    return (this.isMale = true);
+  },
+};
+console.log(student);
+console.log(student.outputAddress());
+console.log("isMale:", student.changeGender());
 
-// 3 Создать функции-конструкторы:
+// 2. создать объект, который содержит свойства, о факультете и кафедре, методы: выплата стипендии студенту. (можно на свой выбор)
+
+const faculty = {
+  nameFaculty: "ETF",
+  namedepartment: ["Electric drive", "Power supply", "Electric cars"],
+  deanFaculty: ["Profesor", "Petrov", "Ivan"],
+  numberOfGroups: 5,
+  numberOfStudents: 100,
+  numberOfTeachers: 10,
+  averageScoreStudent: 3,
+  paymentScholarshipStudent: true,
+  paymentScholarship() {
+    if (this.averageScoreStudent >= 4) {
+      return (this.paymentScholarshipStudent = true);
+    } else {
+      return (this.paymentScholarshipStudent = false);
+    }
+  },
+};
+console.log(faculty);
+console.log("Выплата стипендии студенту:", faculty.paymentScholarship());
+
+/*************3 Создать функции-конструкторы:*****************************/
 
 // - Книга (автор, название, год издания, издательство)
+
+function Book(author, bookName, yearPublication, publisher) {
+  this.author = author;
+  this.name = bookName;
+  this.yearPublication = yearPublication;
+  this.publisher = publisher;
+}
+const book1 = new Book("Стефани Оукс", "Священная ложь", 2014, "ЛитВек");
+const book2 = new Book(
+  "Мелани Бенджамин",
+  "Охота на отражение",
+  2015,
+  "ЛитВек"
+);
+console.log(book1);
+
 // - Электронная версия книги (автор, название, год издания, издательство, формат, электронный номер)
+
+function ElectronicBook(
+  author,
+  bookName,
+  yearPublication,
+  publisher,
+  formatBook,
+  electronicNumber
+) {
+  this.author = author;
+  this.name = bookName;
+  this.yearPublication = yearPublication;
+  this.publisher = publisher;
+  this.fomat = formatBook;
+  this.bookNumber = electronicNumber;
+}
+const elecBook1 = new ElectronicBook(
+  "Стефани Оукс",
+  "Священная ложь",
+  2014,
+  "ЛитВек",
+  "pdf",
+  "3456"
+);
+const elecBook2 = new ElectronicBook(
+  "Мелани Бенджамин",
+  "Охота на отражение",
+  2015,
+  "ЛитВек",
+  "fb2",
+  "3457"
+);
+console.log(elecBook1);
